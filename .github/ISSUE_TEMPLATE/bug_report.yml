@@ -1,0 +1,33 @@
+name: Сообщить об ошибке
+description: Что-то работает не так
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: Что случилось
+      description: Что вы делали, что ожидали и что получили.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Версия Mediaprompter
+      placeholder: 0.1.1
+    validations:
+      required: true
+  - type: input
+    id: windows
+    attributes:
+      label: Версия Windows
+      placeholder: Windows 11 23H2
+  - type: input
+    id: iphone
+    attributes:
+      label: Модель iPhone и версия iOS
+      placeholder: iPhone 16 Pro, iOS 26.1
+  - type: textarea
+    id: network
+    attributes:
+      label: Сеть
+      description: Wi-Fi или кабель у компьютера, VPN, гостевая сеть и т.п.

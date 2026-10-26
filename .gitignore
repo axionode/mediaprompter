@@ -1,0 +1,15 @@
+# Portable runtime (Electron + AirPlay receiver), shipped via GitHub Releases
+/runtime/
+
+# Session data, GStreamer registry, build output
+/work/
+
+# Built launcher
+/Mediaprompter.exe
+
+*.log
+node_modules/
+dist/
+Thumbs.db
+desktop.ini
+.DS_Store

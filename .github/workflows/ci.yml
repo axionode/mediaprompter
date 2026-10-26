@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  unit:
+    name: Unit tests (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm test
+
+  uxplay-patch:
+    name: UxPlay patch applies to upstream
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check vendored UxPlay = upstream + patch
+        run: |
+          git clone --quiet https://github.com/FDH2/UxPlay.git /tmp/uxplay
+          git -C /tmp/uxplay checkout --quiet 82ad05ce34ec862851fa6ab1240f50f58fb7fa5a
+          git -C /tmp/uxplay apply "$GITHUB_WORKSPACE/patches/uxplay-optional-libav.patch"
+          diff -r --exclude=.git /tmp/uxplay native/uxplay

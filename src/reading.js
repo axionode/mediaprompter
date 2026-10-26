@@ -1,0 +1,7 @@
+'use strict';
+window.Reading = {
+ render(content,text){const frag=document.createDocumentFragment();for(const token of text.matchAll(/\S+|\s+/g)){if(/^\s+$/.test(token[0]))frag.append(document.createTextNode(token[0]));else{const word=document.createElement('span');word.dataset.offset=token.index;word.textContent=token[0];frag.append(word);}}content.replaceChildren(frag);},
+ anchor(viewport,content){const words=content.querySelectorAll('span[data-offset]');if(!words.length)return{offset:0,delta:0};const y=viewport.getBoundingClientRect().top;let low=0,high=words.length-1;while(low<high){const mid=(low+high)>>1;if(words[mid].getBoundingClientRect().bottom<=y)low=mid+1;else high=mid;}return{offset:+words[low].dataset.offset,delta:y-words[low].getBoundingClientRect().top};},
+ restore(viewport,content,anchor){const words=content.querySelectorAll('span[data-offset]');if(!words.length){viewport.scrollTop=0;return;}let low=0,high=words.length-1;while(low<high){const mid=Math.ceil((low+high)/2);if(+words[mid].dataset.offset>anchor.offset)high=mid-1;else low=mid;}viewport.scrollTop+=words[low].getBoundingClientRect().top-viewport.getBoundingClientRect().top+(anchor.delta||0);},
+ style(content,s){Object.assign(content.style,{fontFamily:s.fontFamily,fontSize:s.fontSize+'px',lineHeight:String(s.lineHeight),fontWeight:String(s.fontWeight),textAlign:s.textAlign,padding:s.padding+'px',color:s.textColor,transform:s.mirrorText?'scaleX(-1)':'none'});}
+};

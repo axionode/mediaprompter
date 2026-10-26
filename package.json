@@ -1,0 +1,21 @@
+{
+  "name": "mediaprompter",
+  "productName": "Mediaprompter",
+  "version": "0.1.1",
+  "private": true,
+  "description": "Суфлёр и монитор камеры iPhone по AirPlay для Windows. Локально, без облака.",
+  "main": "src/main.cjs",
+  "license": "GPL-3.0-or-later",
+  "scripts": {
+    "start": "runtime\\electron\\electron.exe .",
+    "test": "node --test tests/core.test.cjs tests/video-quality.test.cjs",
+    "test:integration": "node --test tests/receiver.test.cjs && node tests/discovery.cjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/axionode/mediaprompter.git"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
