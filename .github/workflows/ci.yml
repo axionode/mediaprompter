@@ -14,8 +14,8 @@ jobs:
       matrix:
         os: [windows-latest, ubuntu-latest]
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
         with:
           node-version: 22
       - run: npm test
@@ -24,7 +24,7 @@ jobs:
     name: UxPlay patch applies to upstream
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Check vendored UxPlay = upstream + patch
         run: |
           git clone --quiet https://github.com/FDH2/UxPlay.git /tmp/uxplay
